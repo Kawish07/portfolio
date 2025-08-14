@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.0.0",
+    "react-tsparticles": "^2.12.2"
+  }
+}
