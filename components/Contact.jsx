@@ -12,7 +12,8 @@ const Contact = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     setStatus('Sending...');
-    const res = await fetch('http://localhost:5000/api/contact', {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+  const res = await fetch(`${backendUrl}/api/contact`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form),
