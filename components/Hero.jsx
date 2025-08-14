@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 const Hero = () => (
   <section id="hero" className="flex flex-col items-center justify-center h-screen text-center relative bg-gradient-to-br from-darkblue via-mate to-darkblue">
     <motion.img 
-      src="/kawish-iqbal.jpg" 
+      src="/Kawish-Iqbal.jpg" 
       alt="Kawish Iqbal" 
       className="w-44 h-44 rounded-full mb-8 shadow-neon object-cover border-4 border-neon/80 bg-glass backdrop-blur-lg" 
       initial={{ opacity: 0, y: -50 }} 
