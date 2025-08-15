@@ -13,7 +13,8 @@ const Contact = () => {
     e.preventDefault();
     setStatus('Sending...');
   const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
-  const res = await fetch(`${backendUrl}/api/contact`, {
+  try {
+    const res = await fetch(`${backendUrl}/api/contact`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form),
@@ -24,18 +25,31 @@ const Contact = () => {
     } else {
       setStatus('Error sending message.');
     }
+  } catch (error) {
+    setStatus('Error sending message.');
+  }
   };
 
   return (
     <section id="contact" className="py-16 px-4 md:px-16">
-      <motion.h2 className="text-3xl font-bold mb-6 text-neon" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>Contact</motion.h2>
-      <form className="bg-glass rounded-lg shadow-glass p-6 flex flex-col gap-4" onSubmit={handleSubmit}>
-        <input type="text" name="name" placeholder="Name" value={form.name} onChange={handleChange} required className="p-2 rounded bg-gray-800 text-white" />
-        <input type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required className="p-2 rounded bg-gray-800 text-white" />
-        <textarea name="message" placeholder="Message" value={form.message} onChange={handleChange} required className="p-2 rounded bg-gray-800 text-white" rows={4} />
-        <button type="submit" className="bg-neon text-black font-bold py-2 px-4 rounded">Send</button>
-        {status && <div className="mt-2 text-neon">{status}</div>}
-      </form>
+      <h2 className="text-3xl font-bold mb-6 text-neon">Contact Information</h2>
+      <div className="max-w-xl mx-auto bg-darkblue bg-opacity-60 rounded-xl shadow-lg p-8 text-center glassmorphism">
+        <div className="flex flex-col gap-6 items-center">
+          <div className="flex items-center gap-3">
+            <span className="text-lg font-semibold">Email:</span>
+            <span className="text-lg">kawishiqbal898@gmail.com</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="text-lg font-semibold">Phone:</span>
+            <span className="text-lg">+92 3179511056</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="text-lg font-semibold">LinkedIn:</span>
+            <a href="https://www.linkedin.com/in/kawish-iqbal/222767264/" target="_blank" rel="noopener noreferrer" className="text-lg underline text-neon">LinkedIn Profile</a>
+          </div>
+        </div>
+        <p className="mt-8 text-gray-300">Feel free to reach out via email, phone, or LinkedIn!</p>
+      </div>
     </section>
   );
 };
