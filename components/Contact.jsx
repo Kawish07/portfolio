@@ -45,7 +45,7 @@ const Contact = () => {
           </div>
           <div className="flex items-center gap-3">
             <span className="text-lg font-semibold">LinkedIn:</span>
-              <a href="https://www.linkedin.com/in/kawishiqbal" target="_blank" rel="noopener noreferrer" className="text-lg underline text-neon">LinkedIn Profile</a>
+              <a href="https://www.linkedin.com/in/kawish-iqbal-222767264/" target="_blank" rel="noopener noreferrer" className="text-lg underline text-neon">LinkedIn Profile</a>
           </div>
         {/* WhatsApp Floating Icon */}
         <a
