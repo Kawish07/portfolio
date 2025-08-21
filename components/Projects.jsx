@@ -19,12 +19,12 @@ const sampleProjects = [
     tags: ['Bootstrap', 'Responsive']
   },
   {
-    title: 'Portfolio Website',
-    description: 'React.js-based portfolio site.',
-    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80',
+    title: 'Proactive Cleaner Website',
+    description: 'Mern Stack-based cleaning service site.',
+    image: 'https://plus.unsplash.com/premium_photo-1664301014580-9d9941d1fb51?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8UFJPQUNUSVZFJTIwQ0xFQU5JTkd8ZW58MHx8MHx8fDA%3D',
     demo: '',
-    github: 'https://github.com/kawishiqbal/portfolio-old',
-    tags: ['React.js']
+    github: 'https://github.com/kawishiqbal/proactive-cleaning',
+    tags: ['EmailJS', 'ReactJs', 'NodeJs', 'ExpressJs']
   },
   {
     title: 'Learning Management System (LMS)',
@@ -37,7 +37,15 @@ const sampleProjects = [
   {
     title: 'Evolvians Software Website',
     description: 'Software house website using MERN stack.',
-    image: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1649451844931-57e22fc82de3?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZXZvbHZpYW5zJTIwc29mdHdhcmV8ZW58MHx8MHx8fDA%3D',
+    demo: '',
+    github: 'https://github.com/kawishiqbal/evolvians',
+    tags: ['MERN']
+  },
+   {
+    title: 'PK News Website',
+    description: 'News website using MERN stack.',
+    image: 'https://images.unsplash.com/photo-1508921340878-ba53e1f016ec?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG5ld3N8ZW58MHx8MHx8fDA%3D',
     demo: '',
     github: 'https://github.com/kawishiqbal/evolvians',
     tags: ['MERN']
