@@ -23,7 +23,6 @@ function App() {
           <Projects />
           <Experience />
           <Contact />
-          <Resume />
         </main>
       </div>
     </Router>
