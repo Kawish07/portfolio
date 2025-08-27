@@ -5,8 +5,8 @@ const sampleProjects = [
     title: 'Smart Dining Hub',
     description: 'MERN + Next.js + MongoDB Atlas project with AI-based recommendation system, chatbot, dashboards, real-time order tracking, payment integration.',
     image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80',
-    demo: 'https://smartdininghub.com',
-    github: 'https://github.com/kawishiqbal/smart-dining-hub',
+    demo: 'https://smart-dining-hub.vercel.app/',
+    github: 'https://github.com/Kawish07/smart-dining-hub',
     tags: ['MERN', 'Next.js', 'AI', 'Payment'],
     featured: true
   },
@@ -15,15 +15,15 @@ const sampleProjects = [
     description: 'Responsive university website built with Bootstrap.',
     image: 'https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=600&q=80',
     demo: 'https://iqrauniversity.edu.pk',
-    github: 'https://github.com/kawishiqbal/iqra-university',
+    github: 'https://github.com/Kawish07/iqra-university',
     tags: ['Bootstrap', 'Responsive']
   },
   {
     title: 'Proactive Cleaner Website',
     description: 'Mern Stack-based cleaning service site.',
     image: 'https://plus.unsplash.com/premium_photo-1664301014580-9d9941d1fb51?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8UFJPQUNUSVZFJTIwQ0xFQU5JTkd8ZW58MHx8MHx8fDA%3D',
-    demo: '',
-    github: 'https://github.com/kawishiqbal/proactive-cleaning',
+    demo: 'https://proactive-seven.vercel.app/',
+    github: 'https://github.com/Kawish07/proactive',
     tags: ['EmailJS', 'ReactJs', 'NodeJs', 'ExpressJs']
   },
   {
@@ -31,7 +31,7 @@ const sampleProjects = [
     description: 'Bootstrap-based LMS for course and student management.',
     image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80',
     demo: '',
-    github: 'https://github.com/kawishiqbal/lms',
+    github: 'https://github.com/Kawish07/lms',
     tags: ['Bootstrap', 'LMS']
   },
   {
@@ -39,15 +39,15 @@ const sampleProjects = [
     description: 'Software house website using MERN stack.',
     image: 'https://images.unsplash.com/photo-1649451844931-57e22fc82de3?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZXZvbHZpYW5zJTIwc29mdHdhcmV8ZW58MHx8MHx8fDA%3D',
     demo: '',
-    github: 'https://github.com/kawishiqbal/evolvians',
+    github: 'https://github.com/Kawish07/evolvians',
     tags: ['MERN']
   },
    {
     title: 'PK News Website',
     description: 'News website using MERN stack.',
     image: 'https://images.unsplash.com/photo-1508921340878-ba53e1f016ec?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG5ld3N8ZW58MHx8MHx8fDA%3D',
-    demo: '',
-    github: 'https://github.com/kawishiqbal/evolvians',
+    demo: 'https://news-client-bice.vercel.app/',
+    github: 'https://github.com/Kawish07/news-client',
     tags: ['MERN']
   }
 ];
@@ -163,7 +163,7 @@ const Projects = () => {
                   </p>
                   
                   {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-3">
                     {project.tags.map((tag, tagIdx) => (
                       <span
                         key={tag}
@@ -176,6 +176,32 @@ const Projects = () => {
                       </span>
                     ))}
                   </div>
+
+                  {/* Action Links: Only for selected projects */}
+                  {['Smart Dining Hub', 'Proactive Cleaner Website', 'PK News Website'].includes(project.title) && (
+                    <div className="flex gap-4 mt-2">
+                      {project.demo && (
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-4 py-2 bg-gradient-to-r from-red-500 to-red-700 text-white rounded-full text-xs font-bold shadow hover:scale-105 transition-transform duration-200"
+                        >
+                          Live Demo
+                        </a>
+                      )}
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-4 py-2 bg-slate-700 text-red-300 rounded-full text-xs font-bold border border-red-500/30 hover:bg-red-500 hover:text-white transition-all duration-200"
+                        >
+                          GitHub
+                        </a>
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 {/* Hover Effect Border */}
