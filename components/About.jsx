@@ -27,8 +27,8 @@ const About = () => {
   ];
 
   return (
-    <section 
-      id="about" 
+    <section
+      id="about"
       className="relative py-20 px-4 md:px-16 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden"
     >
       {/* Background Elements */}
@@ -39,10 +39,9 @@ const About = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Section Title */}
-        <div 
-          className={`text-center mb-16 transition-all duration-1000 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
+        <div
+          className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
         >
           <h2 className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700 mb-4">
             About Me
@@ -51,12 +50,11 @@ const About = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          
+
           {/* Content Side */}
-          <div 
-            className={`space-y-8 transition-all duration-1000 delay-300 ${
-              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
-            }`}
+          <div
+            className={`space-y-8 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+              }`}
           >
             {/* Introduction */}
             <div className="relative group">
@@ -78,7 +76,7 @@ const About = () => {
                 },
                 {
                   title: 'Experience',
-                  content: '1.5 years MERN stack, 1 year Frontend Intern (Crafting Colons), 5 months Backend, 1 month ML internship (Sparks Foundation)',
+                  content: '1.5 years MERN stack, 3 Months Frontend Intern (Crafting Colons), 3 Months Backend (Crafting Colons), Freelancing, 3 months head of web development intern,1 month ML internship (Sparks Foundation), ',
                   icon: '💼'
                 },
                 {
@@ -87,11 +85,10 @@ const About = () => {
                   icon: '🏆'
                 }
               ].map((item, i) => (
-                <div 
+                <div
                   key={item.title}
-                  className={`flex items-start space-x-4 transition-all duration-700 delay-${500 + i * 100} ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
-                  }`}
+                  className={`flex items-start space-x-4 transition-all duration-700 delay-${500 + i * 100} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+                    }`}
                 >
                   <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center text-white text-xl shadow-lg">
                     {item.icon}
@@ -105,9 +102,8 @@ const About = () => {
             </div>
 
             {/* Skills Summary */}
-            <div className={`transition-all duration-700 delay-800 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
-            }`}>
+            <div className={`transition-all duration-700 delay-800 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+              }`}>
               <div className="relative group">
                 <div className="absolute inset-0 bg-gradient-to-r from-red-600/10 to-red-500/10 rounded-2xl blur-xl" />
                 <div className="relative bg-slate-800/50 backdrop-blur-sm border border-red-500/20 rounded-2xl p-6">
@@ -120,9 +116,8 @@ const About = () => {
             </div>
 
             {/* Career Goal */}
-            <div className={`transition-all duration-700 delay-1000 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
-            }`}>
+            <div className={`transition-all duration-700 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+              }`}>
               <div className="relative group">
                 <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-red-600/20 rounded-2xl blur-xl animate-pulse" />
                 <div className="relative bg-gradient-to-r from-red-500/10 to-red-600/10 backdrop-blur-sm border-2 border-red-500/30 rounded-2xl p-6 text-center">
@@ -134,18 +129,16 @@ const About = () => {
           </div>
 
           {/* Stats Side */}
-          <div 
-            className={`transition-all duration-1000 delay-500 ${
-              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
-            }`}
+          <div
+            className={`transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+              }`}
           >
             <div className="grid grid-cols-2 gap-6">
               {stats.map((stat, i) => (
-                <div 
+                <div
                   key={stat.label}
-                  className={`group relative transition-all duration-700 delay-${700 + i * 100} ${
-                    isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
-                  }`}
+                  className={`group relative transition-all duration-700 delay-${700 + i * 100} ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
+                    }`}
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-red-500/20 to-red-600/20 rounded-2xl blur-xl group-hover:from-red-500/30 group-hover:to-red-600/30 transition-all duration-500" />
                   <div className="relative bg-slate-800/70 backdrop-blur-sm border border-red-500/30 rounded-2xl p-6 text-center group-hover:border-red-400/50 transition-all duration-300">
@@ -165,14 +158,13 @@ const About = () => {
               <h3 className="text-2xl font-bold text-center text-red-400 mb-8">Tech Stack</h3>
               <div className="flex flex-wrap justify-center gap-3">
                 {[
-                  'React.js', 'Next.js', 'Node.js', 'MongoDB', 'Express.js', 
+                  'React.js', 'Next.js', 'Node.js', 'MongoDB', 'Express.js',
                   'Tailwind CSS', 'JavaScript', 'TypeScript', 'REST APIs', 'Git'
                 ].map((tech, i) => (
                   <span
                     key={tech}
-                    className={`bg-slate-800/60 backdrop-blur-sm text-red-300 px-4 py-2 rounded-full border border-red-500/30 hover:border-red-400/60 hover:bg-red-500/10 transition-all duration-300 cursor-default text-sm font-medium transition-all duration-700 delay-${900 + i * 50} ${
-                      isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
-                    }`}
+                    className={`bg-slate-800/60 backdrop-blur-sm text-red-300 px-4 py-2 rounded-full border border-red-500/30 hover:border-red-400/60 hover:bg-red-500/10 transition-all duration-300 cursor-default text-sm font-medium transition-all duration-700 delay-${900 + i * 50} ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
+                      }`}
                   >
                     {tech}
                   </span>

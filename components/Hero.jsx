@@ -89,16 +89,27 @@ const Hero = () => {
 
         {/* Main Title with Staggered Animation */}
         <div className="mb-6">
-          <h1 className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-red-500 to-white mb-4 leading-tight">
+          <h1 className="text-6xl md:text-8xl font-black mb-4 leading-tight">
             {['MERN', 'STACK', 'DEVELOPER'].map((word, i) => (
               <span
                 key={word}
-                className="inline-block mx-2"
+                className="inline-block mx-2 px-4 py-2 rounded-xl"
                 style={{
-                  animation: `slideInUp 1s ease-out ${i * 0.2}s both`
+                  animation: `slideInUp 1s ease-out ${i * 0.2}s both`,
+                  background: 'linear-gradient(135deg, #181824 0%, #1e293b 60%, #dc2626 100%)',
+                  color: 'white',
+                  boxShadow: '0 2px 16px 0 rgba(220, 38, 127, 0.15)',
+                  border: '1px solid #dc2626',
+                  fontWeight: 'bold',
+                  letterSpacing: '0.05em'
                 }}
               >
-                {word}
+                <span style={{
+                  background: 'linear-gradient(90deg, #fff 0%, #ff4a4a 50%, #fff 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  fontWeight: 'inherit'
+                }}>{word}</span>
               </span>
             ))}
           </h1>
@@ -108,9 +119,9 @@ const Hero = () => {
         <div className="mb-8 flex flex-wrap justify-center gap-4">
           {[
             'Frontend Specialist',
-            'AI Chatbot',
-            'Real-time Apps',
-            'Payment Integration'
+             'AI Chatbot',
+             'Real-time Apps',
+             'Payment Integration'
           ].map((skill, i) => (
             <div
               key={skill}

@@ -4,7 +4,7 @@ const experiences = [
   {
     role: 'Frontend Developer Intern',
     company: 'Crafting Colons',
-    duration: '1 year',
+    duration: '3 Months',
     description: 'Worked on portfolio sites, Iqra University site, LMS system. Built responsive and modern UIs.',
     icon: '💻',
     color: 'from-red-500 to-red-600'
@@ -12,7 +12,7 @@ const experiences = [
   {
     role: 'Backend Developer Intern',
     company: 'Crafting Colons',
-    duration: '5 months',
+    duration: '3 months',
     description: 'Developed REST APIs, integrated payment gateways, and implemented real-time features.',
     icon: '⚙️',
     color: 'from-red-600 to-red-700'
@@ -28,9 +28,17 @@ const experiences = [
   {
     role: 'Head of Web Development Intern',
     company: 'Evolvians Software',
-    duration: '2 months (remote)',
+    duration: '3 months (remote)',
     description: 'Led a team of developers to create a web application using MERN stack.',
     icon: '👑',
+    color: 'from-red-700 to-red-800'
+  },
+  {
+    role: 'Freelance Projects',
+    company: 'Freelancer',
+    duration: 'March 2025 - Present',
+    description: 'Working on various freelance projects including web development and machine learning.',
+    icon: '🛠️',
     color: 'from-red-700 to-red-800'
   }
 ];
