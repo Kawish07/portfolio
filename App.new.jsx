@@ -1,3 +1,4 @@
+// This file enables React Router v7 future flags to suppress upgrade warnings.
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -12,7 +13,7 @@ import Background from './components/Background';
 
 function App() {
   return (
-  <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <div className="relative min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white dark:text-white">
         <Background />
         <Navbar />

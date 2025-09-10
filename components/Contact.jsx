@@ -1,67 +1,134 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useState } from 'react';
+import emailjs from '@emailjs/browser';
+
+const SERVICE_ID = 'service_0bsp86f';
+const TEMPLATE_ID = 'template_zxq6mrs';
+const PUBLIC_KEY = 'unLnuQ0vpWGog3kVz';
 
 const Contact = () => {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState('');
+  const formRef = useRef();
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleChange = e => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async e => {
+  const sendEmail = (e) => {
     e.preventDefault();
-    setStatus('Sending...');
-  const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
-  try {
-    const res = await fetch(`${backendUrl}/api/contact`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
-    });
-    if (res.ok) {
-      setStatus('Message sent!');
-      setForm({ name: '', email: '', message: '' });
-    } else {
-      setStatus('Error sending message.');
+    setLoading(true);
+    setSuccess(false);
+    setError('');
+
+    // Add current time dynamically
+    const timeInput = formRef.current.querySelector('input[name="time"]');
+    if (timeInput) {
+      timeInput.value = new Date().toLocaleString();
     }
-  } catch (error) {
-    setStatus('Error sending message.');
-  }
+
+    // Validate required fields
+    const formData = new FormData(formRef.current);
+    const requiredFields = ['user_name', 'user_email', 'user_number', 'message'];
+    for (let field of requiredFields) {
+      if (!formData.get(field) || formData.get(field).trim() === '') {
+        setLoading(false);
+        setError(`Please fill in the ${field.replace('user_', '').replace('_', ' ')} field.`);
+        return;
+      }
+    }
+
+    // Debug: log form data
+    console.log('Form data being sent:');
+    requiredFields.forEach(f => console.log(f + ':', formData.get(f)));
+    console.log('time:', formData.get('time'));
+
+    emailjs
+      .sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY)
+      .then(() => {
+        setLoading(false);
+        setSuccess(true);
+        formRef.current.reset();
+      })
+      .catch((err) => {
+        setLoading(false);
+        if (err && err.status === 412) {
+          setError('Precondition Failed: Please check that all required fields match your EmailJS template and are not empty.');
+        } else {
+          setError('Something went wrong. Please try again.');
+        }
+        console.error('EmailJS error:', err);
+      });
   };
 
   return (
-    <section id="contact" className="py-16 px-4 md:px-16">
-      <h2 className="text-3xl font-bold mb-6 text-neon">Contact Information</h2>
-      <div className="max-w-xl mx-auto bg-darkblue bg-opacity-60 rounded-xl shadow-lg p-8 text-center glassmorphism">
-        <div className="flex flex-col gap-6 items-center">
-          <div className="flex items-center gap-3">
-            <span className="text-lg font-semibold">Email:</span>
-            <span className="text-lg">kawishiqbal898@gmail.com</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="text-lg font-semibold">Phone:</span>
-            <span className="text-lg">+92 3179511056</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="text-lg font-semibold">LinkedIn:</span>
-              <a href="https://www.linkedin.com/in/kawish-iqbal-222767264/" target="_blank" rel="noopener noreferrer" className="text-lg underline text-neon">LinkedIn Profile</a>
-          </div>
-        {/* WhatsApp Floating Icon */}
-        <a
-          href="https://wa.me/923179511056"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="fixed bottom-6 right-6 z-50 bg-green-500 rounded-full p-4 shadow-lg hover:bg-green-600 transition-all flex items-center justify-center"
-          style={{ boxShadow: '0 4px 20px rgba(37,211,102,0.3)' }}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <circle cx="16" cy="16" r="16" fill="#25D366"/>
-            <path d="M22.5 18.5c-.3-.1-1.7-.8-2-1-.3-.2-.5-.2-.7.1-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.1-1.2-.4-2.3-1.3-.8-.7-1.3-1.5-1.5-1.8-.2-.3-.1-.5.1-.7.2-.2.4-.5.6-.7.2-.2.2-.4.3-.6.1-.2 0-.4-.1-.6-.1-.2-.7-1.7-.9-2.3-.2-.6-.4-.5-.6-.5-.2 0-.4 0-.6 0-.2 0-.5.1-.7.3-.2.2-.7.7-.7 1.7 0 1 .7 2.1 1.1 2.6.4.5 1.7 2.1 4.1 2.9.6.2 1.1.3 1.5.2.4-.1 1.2-.5 1.4-1 .2-.5.2-.9.1-1.1z" fill="#fff"/>
-          </svg>
-        </a>
-        </div>
-        <p className="mt-8 text-gray-300">Feel free to reach out via email, phone, or LinkedIn!</p>
+    <section
+      id="contact"
+      className="min-h-screen flex items-center justify-center bg-transparent py-20"
+    >
+      <div className="bg-slate-900/80 rounded-3xl shadow-2xl p-10 max-w-xl w-full mx-4 border border-red-500/20">
+        <h2 className="text-4xl font-bold text-white mb-6 text-center">
+          Contact Me
+        </h2>
+        <p className="text-lg text-red-300 mb-8 text-center">
+          Have a project or want to work together? Fill out the form below!
+        </p>
+
+        <form ref={formRef} onSubmit={sendEmail} className="flex flex-col gap-6">
+          {/* Name */}
+          <input
+            type="text"
+            name="user_name"
+            placeholder="Your Name"
+            required
+            className="bg-slate-800/80 border border-red-500/30 rounded-xl px-5 py-3 text-white placeholder-red-300 focus:outline-none focus:border-red-500 transition-all duration-300 shadow-md"
+          />
+
+          {/* Email */}
+          <input
+            type="email"
+            name="user_email"
+            placeholder="Your Email"
+            required
+            className="bg-slate-800/80 border border-red-500/30 rounded-xl px-5 py-3 text-white placeholder-red-300 focus:outline-none focus:border-red-500 transition-all duration-300 shadow-md"
+          />
+
+          {/* Phone Number */}
+          <input
+            type="text"
+            name="user_number"
+            placeholder="Your Phone Number"
+            required
+            className="bg-slate-800/80 border border-red-500/30 rounded-xl px-5 py-3 text-white placeholder-red-300 focus:outline-none focus:border-red-500 transition-all duration-300 shadow-md"
+          />
+
+          {/* Message */}
+          <textarea
+            name="message"
+            placeholder="Your Message"
+            required
+            rows={5}
+            className="bg-slate-800/80 border border-red-500/30 rounded-xl px-5 py-3 text-white placeholder-red-300 focus:outline-none focus:border-red-500 transition-all duration-300 shadow-md resize-none"
+          />
+
+          {/* Hidden field for time */}
+          <input type="hidden" name="time" />
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            disabled={loading}
+            className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed text-lg tracking-wide border-2 border-red-500/50"
+          >
+            {loading ? 'Sending...' : 'Send Message'}
+          </button>
+
+          {/* Success/Error Messages */}
+          {success && (
+            <p className="text-green-400 text-center font-semibold">
+              ✅ Message sent successfully!
+            </p>
+          )}
+          {error && (
+            <p className="text-red-400 text-center font-semibold">{error}</p>
+          )}
+        </form>
       </div>
     </section>
   );

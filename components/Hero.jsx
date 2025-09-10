@@ -164,7 +164,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <style jsx>{`
+  <style>{`
         @keyframes slideInUp {
           from {
             opacity: 0;
