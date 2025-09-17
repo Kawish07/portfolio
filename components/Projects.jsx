@@ -19,8 +19,9 @@ const sampleProjects = [
     title: "Iqra University Website",
     description: "Responsive university website built with Bootstrap.",
     image:
-      "https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=600&q=80",
+    "https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=600&q=80",
     github: "https://github.com/Kawish07/iqra-university",
+    demo: "https://iqra-university-frontend.vercel.app/",
     tags: ["Bootstrap", "Responsive"],
   },
   {
