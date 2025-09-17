@@ -76,12 +76,12 @@ const About = () => {
                 },
                 {
                   title: 'Experience',
-                  content: '1.5 years MERN stack, 3 Months Frontend Intern (Crafting Colons), 3 Months Backend (Crafting Colons), Freelancing, 3 months head of web development intern,1 month ML internship (Sparks Foundation), ',
+                  content: '1.5 years MERN stack, 6 months Full Stack Development, Freelancing, 3 months head of web development intern,1 month ML internship (Sparks Foundation), ',
                   icon: '💼'
                 },
                 {
                   title: 'Certifications',
-                  content: 'Frontend Development (Crafting Colons)',
+                  content: 'Full Stack Development (Crafting Colons)',
                   icon: '🏆'
                 }
               ].map((item, i) => (
