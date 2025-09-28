@@ -60,6 +60,15 @@ const sampleProjects = [
     github: "https://github.com/Kawish07/news-client",
     tags: ["MERN"],
   },
+  {
+    title: "TriWeb Studio Website",
+    description: "Business website using MERN stack.",
+    image:
+      "https://images.unsplash.com/photo-1577045060575-07424f4e7aa7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dHJpd2ViJTIwc3R1ZGlvfGVufDB8fDB8fHww",
+    demo: "https://tri-web-studio.vercel.app/",
+    github: "https://github.com/Kawish07/TriWebStudio",
+    tags: ["MERN"],
+  },
 ];
 
 const Projects = () => {
