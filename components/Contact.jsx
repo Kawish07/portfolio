@@ -17,43 +17,87 @@ const Contact = () => {
     setSuccess(false);
     setError('');
 
-    // Add current time dynamically
-    const timeInput = formRef.current.querySelector('input[name="time"]');
-    if (timeInput) {
-      timeInput.value = new Date().toLocaleString();
-    }
-
-    // Validate required fields
+    // Get form data
     const formData = new FormData(formRef.current);
+    
+    // Validate required fields
     const requiredFields = ['user_name', 'user_email', 'user_number', 'message'];
     for (let field of requiredFields) {
-      if (!formData.get(field) || formData.get(field).trim() === '') {
+      const value = formData.get(field);
+      if (!value || value.trim() === '') {
         setLoading(false);
         setError(`Please fill in the ${field.replace('user_', '').replace('_', ' ')} field.`);
         return;
       }
     }
 
-    // Debug: log form data
-    console.log('Form data being sent:');
-    requiredFields.forEach(f => console.log(f + ':', formData.get(f)));
-    console.log('time:', formData.get('time'));
+    // Email validation
+    const email = formData.get('user_email').trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setLoading(false);
+      setError('Please enter a valid email address.');
+      return;
+    }
 
+    // Create template parameters object that exactly matches the template
+    const templateParams = {
+      user_name: formData.get('user_name').trim(),
+      user_email: formData.get('user_email').trim(),
+      user_number: formData.get('user_number').trim(),
+      message: formData.get('message').trim(),
+      time: new Date().toLocaleString('en-US', {
+        timeZone: 'Asia/Singapore',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      })
+    };
+
+    // Debug logging
+    console.log('Sending email with template params:', templateParams);
+    console.log('Using Service ID:', SERVICE_ID);
+    console.log('Using Template ID:', TEMPLATE_ID);
+    console.log('Using Public Key:', PUBLIC_KEY);
+
+    // Initialize EmailJS (sometimes this helps with 412 errors)
+    emailjs.init(PUBLIC_KEY);
+
+    // Send email
     emailjs
-      .sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY)
-      .then(() => {
+      .send(SERVICE_ID, TEMPLATE_ID, templateParams)
+      .then((response) => {
+        console.log('EmailJS SUCCESS!', response.status, response.text);
         setLoading(false);
         setSuccess(true);
         formRef.current.reset();
+        
+        // Auto-hide success message after 5 seconds
+        setTimeout(() => {
+          setSuccess(false);
+        }, 5000);
       })
-      .catch((err) => {
+      .catch((error) => {
         setLoading(false);
-        if (err && err.status === 412) {
-          setError('Precondition Failed: Please check that all required fields match your EmailJS template and are not empty.');
+        console.error('EmailJS ERROR:', error);
+        
+        // More specific error handling
+        if (error.status === 412) {
+          setError('Configuration error. Please verify your EmailJS template settings.');
+        } else if (error.status === 400) {
+          setError('Bad request. Please check your form data.');
+        } else if (error.status === 401) {
+          setError('Unauthorized. Please check your EmailJS public key.');
+        } else if (error.status === 404) {
+          setError('Service or template not found. Please check your IDs.');
+        } else if (error.text) {
+          setError(`Error: ${error.text}`);
         } else {
-          setError('Something went wrong. Please try again.');
+          setError('Failed to send message. Please try again later.');
         }
-        console.error('EmailJS error:', err);
       });
   };
 
@@ -62,7 +106,7 @@ const Contact = () => {
       id="contact"
       className="min-h-screen flex items-center justify-center bg-transparent py-20"
     >
-      <div className="bg-slate-900/80 rounded-3xl shadow-2xl p-10 max-w-xl w-full mx-4 border border-red-500/20">
+      <div className="bg-slate-900/80 rounded-3xl shadow-2xl p-10 max-w-xl w-full mx-4 border border-red-500/20 backdrop-blur-sm">
         <h2 className="text-4xl font-bold text-white mb-6 text-center">
           Contact Me
         </h2>
@@ -72,61 +116,91 @@ const Contact = () => {
 
         <form ref={formRef} onSubmit={sendEmail} className="flex flex-col gap-6">
           {/* Name */}
-          <input
-            type="text"
-            name="user_name"
-            placeholder="Your Name"
-            required
-            className="bg-slate-800/80 border border-red-500/30 rounded-xl px-5 py-3 text-white placeholder-red-300 focus:outline-none focus:border-red-500 transition-all duration-300 shadow-md"
-          />
+          <div>
+            <input
+              type="text"
+              name="user_name"
+              placeholder="Your Name"
+              required
+              minLength={2}
+              maxLength={50}
+              className="w-full bg-slate-800/80 border border-red-500/30 rounded-xl px-5 py-3 text-white placeholder-red-300 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all duration-300 shadow-md"
+            />
+          </div>
 
           {/* Email */}
-          <input
-            type="email"
-            name="user_email"
-            placeholder="Your Email"
-            required
-            className="bg-slate-800/80 border border-red-500/30 rounded-xl px-5 py-3 text-white placeholder-red-300 focus:outline-none focus:border-red-500 transition-all duration-300 shadow-md"
-          />
+          <div>
+            <input
+              type="email"
+              name="user_email"
+              placeholder="Your Email"
+              required
+              className="w-full bg-slate-800/80 border border-red-500/30 rounded-xl px-5 py-3 text-white placeholder-red-300 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all duration-300 shadow-md"
+            />
+          </div>
 
           {/* Phone Number */}
-          <input
-            type="text"
-            name="user_number"
-            placeholder="Your Phone Number"
-            required
-            className="bg-slate-800/80 border border-red-500/30 rounded-xl px-5 py-3 text-white placeholder-red-300 focus:outline-none focus:border-red-500 transition-all duration-300 shadow-md"
-          />
+          <div>
+            <input
+              type="tel"
+              name="user_number"
+              placeholder="Your Phone Number"
+              required
+              minLength={10}
+              maxLength={15}
+              className="w-full bg-slate-800/80 border border-red-500/30 rounded-xl px-5 py-3 text-white placeholder-red-300 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all duration-300 shadow-md"
+            />
+          </div>
 
           {/* Message */}
-          <textarea
-            name="message"
-            placeholder="Your Message"
-            required
-            rows={5}
-            className="bg-slate-800/80 border border-red-500/30 rounded-xl px-5 py-3 text-white placeholder-red-300 focus:outline-none focus:border-red-500 transition-all duration-300 shadow-md resize-none"
-          />
-
-          {/* Hidden field for time */}
-          <input type="hidden" name="time" />
+          <div>
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              required
+              minLength={10}
+              maxLength={1000}
+              rows={5}
+              className="w-full bg-slate-800/80 border border-red-500/30 rounded-xl px-5 py-3 text-white placeholder-red-300 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all duration-300 shadow-md resize-none"
+            />
+          </div>
 
           {/* Submit Button */}
           <button
             type="submit"
             disabled={loading}
-            className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed text-lg tracking-wide border-2 border-red-500/50"
+            className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold py-4 px-8 rounded-xl shadow-lg transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed text-lg tracking-wide border-2 border-red-500/50 transform hover:scale-[1.02] active:scale-[0.98]"
           >
-            {loading ? 'Sending...' : 'Send Message'}
+            {loading ? (
+              <span className="flex items-center justify-center gap-2">
+                <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Sending...
+              </span>
+            ) : (
+              'Send Message'
+            )}
           </button>
 
           {/* Success/Error Messages */}
           {success && (
-            <p className="text-green-400 text-center font-semibold">
-              ✅ Message sent successfully!
-            </p>
+            <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-4 backdrop-blur-sm">
+              <p className="text-green-400 text-center font-semibold flex items-center justify-center gap-2">
+                <span className="text-xl">✅</span>
+                Message sent successfully! I'll get back to you soon.
+              </p>
+            </div>
           )}
+          
           {error && (
-            <p className="text-red-400 text-center font-semibold">{error}</p>
+            <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4 backdrop-blur-sm">
+              <p className="text-red-400 text-center font-semibold flex items-center justify-center gap-2">
+                <span className="text-xl">❌</span>
+                {error}
+              </p>
+            </div>
           )}
         </form>
       </div>
