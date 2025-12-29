@@ -2,20 +2,20 @@ import React, { useState, useEffect } from 'react';
 
 const experiences = [
   {
-    role: 'Frontend Developer Intern',
-    company: 'Crafting Colons',
-    duration: '3 Months',
-    description: 'Worked on portfolio sites, Iqra University site, LMS system. Built responsive and modern UIs.',
-    icon: '💻',
+    role: 'Mern Stack Developer',
+    company: 'Veclar Technologies',
+    duration: 'Nov 2025 - Present',
+    description: 'Developed and maintained web applications using the MERN stack. Collaborated with cross-functional teams to deliver high-quality software solutions.',
+    icon: '🛠️',
     color: 'from-red-500 to-red-600'
   },
   {
-    role: 'Backend Developer Intern',
+    role: 'Full Stack Developer',
     company: 'Crafting Colons',
-    duration: '3 months',
-    description: 'Developed REST APIs, integrated payment gateways, and implemented real-time features.',
-    icon: '⚙️',
-    color: 'from-red-600 to-red-700'
+    duration: '6 Months',
+    description: 'Worked on portfolio sites, Iqra University site, LMS system. Built responsive and modern UIs.',
+    icon: '💻',
+    color: 'from-red-500 to-red-600'
   },
   {
     role: 'Machine Learning Intern',
@@ -28,7 +28,7 @@ const experiences = [
   {
     role: 'Head of Web Development Intern',
     company: 'Evolvians Software',
-    duration: '3 months (remote)',
+    duration: '3 months',
     description: 'Led a team of developers to create a web application using MERN stack.',
     icon: '👑',
     color: 'from-red-700 to-red-800'
@@ -36,7 +36,7 @@ const experiences = [
   {
     role: 'Freelance Projects',
     company: 'Freelancer',
-    duration: 'March 2025 - Present',
+    duration: 'March 2025 - Nov 2025',
     description: 'Working on various freelance projects including web development and machine learning.',
     icon: '🛠️',
     color: 'from-red-700 to-red-800'

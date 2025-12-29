@@ -34,24 +34,6 @@ const sampleProjects = [
     tags: ["EmailJS", "ReactJs", "NodeJs", "ExpressJs"],
   },
   {
-    title: "Learning Management System (LMS)",
-    description: "Bootstrap-based LMS for course and student management.",
-    image:
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80",
-    demo: "",
-    github: "https://github.com/Kawish07/lms",
-    tags: ["Bootstrap", "LMS"],
-  },
-  {
-    title: "Evolvians Software Website",
-    description: "Software house website using MERN stack.",
-    image:
-      "https://images.unsplash.com/photo-1649451844931-57e22fc82de3?w=600&auto=format&fit=crop&q=60",
-    demo: "",
-    github: "https://github.com/Kawish07/evolvians",
-    tags: ["MERN"],
-  },
-  {
     title: "PK News Website",
     description: "News website using MERN stack.",
     image:
@@ -67,6 +49,24 @@ const sampleProjects = [
       "https://images.unsplash.com/photo-1577045060575-07424f4e7aa7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dHJpd2ViJTIwc3R1ZGlvfGVufDB8fDB8fHww",
     demo: "https://tri-web-studio.vercel.app/",
     github: "https://github.com/Kawish07/TriWebStudio",
+    tags: ["MERN"],
+  },
+  {
+    title: "ListWithLeatonic",
+    description: "A Real estate web-application built with Mern Stack.",
+    image:
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&auto=format&fit=crop&q=60",
+    demo: "https://list-with-leatonic-60gar63kb-kawish-iqbals-projects.vercel.app/",
+    github: "https://github.com/Kawish07/ListWithLeatonic",
+    tags: ["MERN"],
+  },
+  {
+    title: "My Agency Website",
+    description: "A Real estate agency website built with Mern Stack.",
+    image:
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&auto=format&fit=crop&q=60",
+    demo: "https://my-agency-omega.vercel.app/",
+    github: "https://github.com/Kawish07/my-agency",
     tags: ["MERN"],
   },
 ];
