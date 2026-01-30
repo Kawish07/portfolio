@@ -12,7 +12,7 @@ const Resume = () => {
             Download my resume to get a comprehensive look at my education, work history, and technical certifications.
           </p>
           <a 
-            href="public/KAWISH IQBAL_RESUME.pdf" 
+            href="/KAWISH IQBAL_RESUME.pdf" 
             download 
             className="inline-flex items-center gap-3 bg-red-600 hover:bg-red-700 text-white dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 px-8 py-4 rounded-full font-bold transition-all transform hover:scale-105 relative z-10 shadow-[0_0_20px_rgba(220,38,38,0.3)]"
           >

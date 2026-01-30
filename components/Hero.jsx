@@ -87,7 +87,7 @@ const Hero = () => {
             <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-slate-800 shadow-2xl">
               {/* YOUR PERSONAL IMAGE */}
               <img 
-                src="public/myimage.jpg" 
+                src="/myimage.jpg" 
                 alt="Kawish Iqbal" 
                 className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
               />
