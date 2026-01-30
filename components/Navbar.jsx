@@ -1,82 +1,96 @@
-import React, { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Menu, X, Moon, Sun } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { isDarkMode, toggleTheme } = useTheme();
 
-  const navItems = ['Home', 'About', 'Skills', 'Projects', 'Experience', 'Contact'];
+  const navItems = ['Home', 'About', 'Skills', 'Experience', 'Projects', 'Contact'];
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <nav className="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-lg shadow-xl border-b border-cyan-500/30">
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+      scrolled 
+        ? 'bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-gray-200 dark:border-red-500/20 py-3' 
+        : 'bg-transparent py-5'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <h1 className="font-extrabold text-cyan-400 text-xl sm:text-2xl tracking-widest drop-shadow-lg hover:drop-shadow-2xl transition-all duration-300 cursor-pointer">
-              Kawish Iqbal
-            </h1>
+            <a href="#" className="text-2xl font-extrabold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500 hover:scale-105 transition-transform duration-300">
+              KAWISH.DEV
+            </a>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
-            <ul className="flex space-x-1 lg:space-x-2">
+            <ul className="flex items-center space-x-8">
               {navItems.map((item) => (
                 <li key={item}>
                   <a 
                     href={`#${item.toLowerCase()}`} 
-                    className="group relative px-3 py-2 font-semibold text-gray-200 hover:text-cyan-400 transition-all duration-300 rounded-lg hover:bg-slate-800/50"
+                    className="text-sm font-medium text-gray-700 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 transition-colors relative group py-2"
                   >
                     {item}
-                    <span className="absolute left-0 bottom-0 w-full h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full"></span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
                   </a>
                 </li>
               ))}
+              <button 
+                onClick={toggleTheme}
+                className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-gray-700 dark:text-slate-300 transition-all duration-300 border border-gray-300 dark:border-slate-700"
+                aria-label="Toggle theme"
+              >
+                {isDarkMode ? <Moon size={18} /> : <Sun size={18} />}
+              </button>
             </ul>
           </div>
 
-          {/* Theme Toggle Button - Desktop */}
-          <div className="hidden md:flex items-center space-x-4">
-            <button className="px-4 py-2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold shadow-lg hover:shadow-cyan-500/25 hover:shadow-2xl border border-cyan-400 hover:from-cyan-400 hover:to-blue-500 transition-all duration-300 transform hover:scale-105">
-              🌗
-            </button>
-          </div>
-
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-3">
-            <button className="p-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg hover:shadow-cyan-500/25 transition-all duration-300">
-              🌗
-            </button>
+          <div className="md:hidden flex items-center space-x-4">
+             <button 
+               onClick={toggleTheme}
+               className="p-2 rounded-full bg-gray-200 dark:bg-slate-800 text-gray-700 dark:text-slate-300 transition-all duration-300"
+               aria-label="Toggle theme"
+             >
+                {isDarkMode ? <Moon size={18} /> : <Sun size={18} />}
+              </button>
             <button
-              onClick={toggleMenu}
-              className="p-2 rounded-lg text-gray-200 hover:text-cyan-400 hover:bg-slate-800/50 transition-all duration-300"
-              aria-label="Toggle menu"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-2 text-gray-700 dark:text-slate-300 hover:text-gray-900 dark:hover:text-white"
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
 
         {/* Mobile Navigation Menu */}
-        <div className={`md:hidden transition-all duration-300 ease-in-out ${
-          isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        } overflow-hidden`}>
-          <div className="px-2 pt-2 pb-3 space-y-1 bg-slate-800/50 rounded-lg mt-2 backdrop-blur-sm border border-slate-700">
-            {navItems.map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className="block px-3 py-2 rounded-md text-base font-semibold text-gray-200 hover:text-cyan-400 hover:bg-slate-700/50 transition-all duration-300"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item}
-              </a>
-            ))}
+        {isMenuOpen && (
+          <div className="md:hidden mt-4 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-gray-200 dark:border-slate-800 rounded-2xl p-4 animate-fadeIn">
+            <div className="flex flex-col space-y-4">
+              {navItems.map((item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  className="block text-lg font-medium text-gray-700 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-800/50 rounded-lg transition-all"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </nav>
   );

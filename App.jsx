@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -24,6 +25,7 @@ function App() {
         lenisRef.current = new Lenis({
           duration: 1.2,
           smooth: true,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         });
 
         const onRaf = (time) => {
@@ -47,20 +49,23 @@ function App() {
   }, []);
 
   return (
-    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <div className="relative min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white dark:text-white">
-        <Background />
-        <Navbar />
-        <main>
-          <Hero />
-          <About />
-          <Skills />
-          <Projects />
-          <Experience />
-          <Contact />
-        </main>
-      </div>
-    </Router>
+    <ThemeProvider>
+      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <div className="relative min-h-screen bg-slate-950 dark:bg-slate-950 bg-gray-50 text-slate-900 dark:text-white selection:bg-red-500 selection:text-white transition-colors duration-300">
+          <Background />
+          <Navbar />
+          <main className="relative z-10">
+            <Hero />
+            <About />
+            <Skills />
+            <Experience />
+            <Projects />
+            <Resume />
+            <Contact />
+          </main>
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
 
