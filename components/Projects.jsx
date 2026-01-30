@@ -51,24 +51,6 @@ const sampleProjects = [
     github: "https://github.com/Kawish07/TriWebStudio",
     tags: ["MERN"],
   },
-  {
-    title: "ListWithLeatonic",
-    description: "A Real estate web-application built with Mern Stack.",
-    image:
-      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&auto=format&fit=crop&q=60",
-    demo: "https://list-with-leatonic-60gar63kb-kawish-iqbals-projects.vercel.app/",
-    github: "https://github.com/Kawish07/ListWithLeatonic",
-    tags: ["MERN"],
-  },
-  {
-    title: "My Agency Website",
-    description: "A Real estate agency website built with Mern Stack.",
-    image:
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&auto=format&fit=crop&q=60",
-    demo: "https://my-agency-omega.vercel.app/",
-    github: "https://github.com/Kawish07/my-agency",
-    tags: ["MERN"],
-  },
 ];
 
 const Projects = () => {
