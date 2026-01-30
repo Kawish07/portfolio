@@ -25,7 +25,7 @@ const About = () => {
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-300 dark:border-slate-700 group">
               {/* YOUR SECOND PERSONAL IMAGE */}
               <img 
-                src="/kawishimage.jpg" 
+                src="/myimage.jpg" 
                 alt="About Kawish" 
                 className="w-full h-[500px] object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-90 group-hover:brightness-100"
               />
