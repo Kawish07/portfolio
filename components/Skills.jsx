@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Github, ExternalLink } from 'lucide-react';
 
 const skillCategories = {
   'Frontend': [
@@ -15,12 +16,30 @@ const skillCategories = {
     { name: 'MongoDB', level: 85 },
     { name: 'REST API', level: 90 },
     { name: 'Socket.io', level: 75 },
+    { name: 'Ruby on Rails', level: 85 },
+    { name: 'SQLite3', level: 80 },
   ],
   'Tools': [
     { name: 'Git/GitHub', level: 90 },
     { name: 'Docker', level: 70 },
     { name: 'Vercel/Netlify', level: 95 },
     { name: 'Postman', level: 85 },
+  ]
+};
+
+const featuredProject = {
+  title: "DevBlog - Ruby on Rails Blog Application",
+  description: "A fully functional blog application built from scratch using Ruby on Rails 7. Features full CRUD operations, MVC architecture, RESTful routing, database migrations, and server-side rendering with ERB templates.",
+  image: "/Screenshot 2026-02-13 021208.png",
+  github: "https://lnkd.in/d68Dbdw2",
+  tags: ["Ruby 3.4", "Rails 7.1", "SQLite3", "Puma", "ERB", "CSS3"],
+  highlights: [
+    "🔹 MVC Architecture - Understanding how Models, Views, and Controllers work together",
+    "🔹 Full CRUD Operations - Create, Read, Update, and Delete blog posts",
+    "🔹 Database Design - SQLite3, migrations, model validations, and seeding data",
+    "🔹 Asset Pipeline - Modern, responsive UI with custom CSS using Sprockets",
+    "🔹 RESTful Routing - Clean, convention-based URL structures",
+    "🔹 Server-Side Rendering - Using ERB templates for dynamic HTML generation"
   ]
 };
 
@@ -82,6 +101,76 @@ const Skills = () => {
               </div>
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* Featured Project Showcase */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mt-20"
+        >
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Skills in Action</h3>
+            <p className="text-gray-600 dark:text-slate-400">Real-world projects showcasing my technical expertise</p>
+          </div>
+
+          <div className="bg-white dark:bg-slate-800/40 rounded-2xl overflow-hidden border border-gray-300 dark:border-slate-700/50 hover:border-red-500/50 transition-all duration-300 shadow-lg">
+            <div className="grid md:grid-cols-2 gap-0">
+              {/* Project Image */}
+              <div className="relative h-64 md:h-auto overflow-hidden bg-gradient-to-br from-red-500/10 to-orange-500/10">
+                <img 
+                  src={featuredProject.image} 
+                  alt={featuredProject.title}
+                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+
+              {/* Project Details */}
+              <div className="p-8 flex flex-col justify-between">
+                <div>
+                  <h4 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">{featuredProject.title}</h4>
+                  <p className="text-gray-600 dark:text-slate-400 mb-4">{featuredProject.description}</p>
+
+                  {/* Tech Stack Tags */}
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {featuredProject.tags.map((tag, idx) => (
+                      <span 
+                        key={idx}
+                        className="px-3 py-1 text-xs font-semibold bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Key Highlights */}
+                  <div className="space-y-2 mb-6">
+                    <p className="font-semibold text-gray-900 dark:text-white mb-3">Key Takeaways:</p>
+                    {featuredProject.highlights.map((highlight, idx) => (
+                      <p key={idx} className="text-sm text-gray-600 dark:text-slate-400 leading-relaxed">
+                        {highlight}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex gap-4">
+                  <a
+                    href={featuredProject.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-300 font-medium"
+                  >
+                    <Github size={18} />
+                    View on GitHub
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
