@@ -1,98 +1,143 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Moon, Sun } from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Github, Linkedin, Mail, Menu, X } from 'lucide-react';
+
+const navLinks = [
+  { label: 'Home',       href: '#hero',       num: '01' },
+  { label: 'About',      href: '#about',      num: '02' },
+  { label: 'Skills',     href: '#skills',     num: '03' },
+  { label: 'Experience', href: '#experience', num: '04' },
+  { label: 'Projects',   href: '#projects',   num: '05' },
+  { label: 'Contact',    href: '#contact',    num: '06' },
+];
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const { isDarkMode, toggleTheme } = useTheme();
-
-  const navItems = ['Home', 'About', 'Skills', 'Experience', 'Projects', 'Contact'];
+  const [active, setActive] = useState('hero');
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const ids = navLinks.map(n => n.href.replace('#', ''));
+    // rootMargin shrinks the observable viewport to a band near the top,
+    // so whichever section occupies that band is the "active" one.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
+      },
+      { rootMargin: '-15% 0px -75% 0px', threshold: 0 }
+    );
+    ids.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
+    return () => observer.disconnect();
   }, []);
 
+  const handleNav = (href) => {
+    setMenuOpen(false);
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      scrolled 
-        ? 'bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-gray-200 dark:border-red-500/20 py-3' 
-        : 'bg-transparent py-5'
-    }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <a href="#" className="text-2xl font-extrabold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500 hover:scale-105 transition-transform duration-300">
-              KAWISH.DEV
-            </a>
-          </div>
+    <>
+      {/* ── Desktop Fixed Left Sidebar ── */}
+      <aside className="hidden lg:flex fixed left-0 top-0 h-screen w-[280px] flex-col justify-between border-r border-white/[0.06] bg-[#0a0a0a]/80 backdrop-blur-sm z-50 px-8 py-10">
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <ul className="flex items-center space-x-8">
-              {navItems.map((item) => (
-                <li key={item}>
-                  <a 
-                    href={`#${item.toLowerCase()}`} 
-                    className="text-sm font-medium text-gray-700 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 transition-colors relative group py-2"
-                  >
-                    {item}
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
-                  </a>
-                </li>
-              ))}
-              <button 
-                onClick={toggleTheme}
-                className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-gray-700 dark:text-slate-300 transition-all duration-300 border border-gray-300 dark:border-slate-700"
-                aria-label="Toggle theme"
-              >
-                {isDarkMode ? <Moon size={18} /> : <Sun size={18} />}
-              </button>
-            </ul>
-          </div>
+        {/* Logo */}
+        <div>
+          <a href="#hero" onClick={() => handleNav('#hero')} className="block mb-14">
+            <span className="text-xl font-black tracking-tighter text-white">KAWISH<span className="text-red-500">.</span>DEV</span>
+            <p className="text-[11px] text-white/30 tracking-[0.2em] uppercase mt-0.5">Full Stack Developer</p>
+          </a>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-4">
-             <button 
-               onClick={toggleTheme}
-               className="p-2 rounded-full bg-gray-200 dark:bg-slate-800 text-gray-700 dark:text-slate-300 transition-all duration-300"
-               aria-label="Toggle theme"
-             >
-                {isDarkMode ? <Moon size={18} /> : <Sun size={18} />}
-              </button>
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 text-gray-700 dark:text-slate-300 hover:text-gray-900 dark:hover:text-white"
-            >
-              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
-          </div>
+          {/* Nav Links */}
+          <nav className="space-y-1">
+            {navLinks.map((link) => {
+              const isActive = active === link.href.replace('#', '');
+              return (
+                <button
+                  key={link.href}
+                  onClick={() => handleNav(link.href)}
+                  className={`group w-full flex items-center gap-4 px-4 py-3 rounded-lg text-left transition-all duration-300 ${
+                    isActive ? 'bg-white/[0.06]' : 'hover:bg-white/[0.04]'
+                  }`}
+                >
+                  <span className={`text-[10px] font-mono transition-colors ${isActive ? 'text-red-500' : 'text-white/20 group-hover:text-white/40'}`}>
+                    {link.num}
+                  </span>
+                  <span className={`text-sm font-medium transition-colors ${isActive ? 'text-white' : 'text-white/40 group-hover:text-white/80'}`}>
+                    {link.label}
+                  </span>
+                  {isActive && (
+                    <motion.div layoutId="indicator" className="ml-auto w-1.5 h-1.5 rounded-full bg-red-500" />
+                  )}
+                </button>
+              );
+            })}
+          </nav>
         </div>
 
-        {/* Mobile Navigation Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden mt-4 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-gray-200 dark:border-slate-800 rounded-2xl p-4 animate-fadeIn">
-            <div className="flex flex-col space-y-4">
-              {navItems.map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className="block text-lg font-medium text-gray-700 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 px-4 py-2 hover:bg-gray-100 dark:hover:bg-slate-800/50 rounded-lg transition-all"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item}
-                </a>
-              ))}
-            </div>
+        {/* Bottom: availability + socials */}
+        <div>
+          {/* Availability badge */}
+          <div className="mb-6 flex items-center gap-2.5 px-4 py-3 rounded-lg border border-white/[0.08] bg-white/[0.03]">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            <span className="text-xs text-white/50">Available for work</span>
           </div>
-        )}
+
+          {/* Social links */}
+          <div className="flex items-center gap-3">
+            <a href="https://github.com/Kawish07" target="_blank" rel="noopener noreferrer"
+              className="p-2.5 rounded-lg border border-white/[0.08] text-white/40 hover:text-white hover:border-white/20 transition-all">
+              <Github size={16} />
+            </a>
+            <a href="https://linkedin.com/in/kawish-iqbal/222767264" target="_blank" rel="noopener noreferrer"
+              className="p-2.5 rounded-lg border border-white/[0.08] text-white/40 hover:text-white hover:border-white/20 transition-all">
+              <Linkedin size={16} />
+            </a>
+            <a href="mailto:kawishiqbal898@gmail.com"
+              className="p-2.5 rounded-lg border border-white/[0.08] text-white/40 hover:text-white hover:border-white/20 transition-all">
+              <Mail size={16} />
+            </a>
+          </div>
+        </div>
+      </aside>
+
+      {/* ── Mobile Top Bar ── */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-[#0a0a0a]/90 backdrop-blur-sm border-b border-white/[0.06]">
+        <span className="text-lg font-black tracking-tighter text-white">KAWISH<span className="text-red-500">.</span>DEV</span>
+        <button onClick={() => setMenuOpen(v => !v)} className="text-white/60 hover:text-white transition-colors">
+          {menuOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
       </div>
-    </nav>
+
+      {/* ── Mobile Drawer ── */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: '-100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '-100%' }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="lg:hidden fixed inset-0 z-40 bg-[#0a0a0a] flex flex-col px-8 pt-24 pb-10"
+          >
+            <nav className="space-y-2 flex-1">
+              {navLinks.map((link) => (
+                <button key={link.href} onClick={() => handleNav(link.href)}
+                  className="flex items-center gap-4 w-full py-4 border-b border-white/[0.06] text-left">
+                  <span className="text-[10px] font-mono text-red-500">{link.num}</span>
+                  <span className="text-2xl font-bold text-white">{link.label}</span>
+                </button>
+              ))}
+            </nav>
+            <div className="flex gap-4 mt-6">
+              <a href="https://github.com/Kawish07" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white"><Github size={20} /></a>
+              <a href="https://linkedin.com/in/kawish-iqbal/222767264" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white"><Linkedin size={20} /></a>
+              <a href="mailto:kawishiqbal898@gmail.com" className="text-white/40 hover:text-white"><Mail size={20} /></a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 

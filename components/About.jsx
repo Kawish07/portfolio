@@ -1,75 +1,79 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code2, Users, Zap } from 'lucide-react';
+import { Code2, Users, Zap, GraduationCap } from 'lucide-react';
 
-const About = () => {
-  const stats = [
-    { icon: <Code2 />, label: 'Projects Completed', value: '20+' },
-    { icon: <Users />, label: 'Happy Clients', value: '10+' },
-    { icon: <Zap />, label: 'Years Experience', value: '2+' },
-  ];
+const stats = [
+  { value: '20+', label: 'Projects Shipped' },
+  { value: '2+',  label: 'Years Experience' },
+  { value: '15+', label: 'Happy Clients' },
+  { value: '3.51', label: 'CGPA BS CS' },
+];
 
-  return (
-    <section id="about" className="py-24 bg-gray-100 dark:bg-slate-900/50 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          
-          {/* Image Section */}
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="relative"
-          >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-300 dark:border-slate-700 group">
-              {/* YOUR SECOND PERSONAL IMAGE */}
-              <img 
-                src="/myimage.jpg" 
-                alt="About Kawish" 
-                className="w-full h-[500px] object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-90 group-hover:brightness-100"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-200 dark:from-slate-900 via-transparent to-transparent opacity-60"></div>
-            </div>
-            
-            {/* Floating Card */}
-            <div className="absolute -bottom-6 -right-6 bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-300 dark:border-slate-700 shadow-xl hidden md:block">
-              <p className="text-4xl font-bold text-gray-900 dark:text-white mb-1">100%</p>
-              <p className="text-sm text-gray-600 dark:text-slate-400">Job Success</p>
-            </div>
-          </motion.div>
+const About = () => (
+  <section id="about" className="relative min-h-screen bg-[#0a0a0a] py-16 lg:py-24 px-6 sm:px-12 lg:px-16 overflow-hidden flex flex-col justify-center">
 
-          {/* Content Section */}
-          <motion.div 
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-sm font-bold text-red-500 tracking-wider uppercase mb-2">About Me</h2>
-            <h3 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">Passionate about creating <span className="text-red-500">impactful</span> digital solutions.</h3>
-            <p className="text-gray-600 dark:text-slate-400 text-lg mb-6 leading-relaxed">
-              I am a dedicated MERN Stack Developer with a knack for turning complex problems into elegant, user-friendly interfaces. I specialize in building scalable web applications that not only look great but perform flawlessly.
-            </p>
-            <p className="text-gray-600 dark:text-slate-400 text-lg mb-8 leading-relaxed">
-              Whether it's integrating AI chatbots, managing real-time data, or crafting responsive dashboards, I bring a technical depth and creative touch to every project.
-            </p>
+    {/* Thin top border */}
+    <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-            {/* Stats Grid */}
-            <div className="grid grid-cols-3 gap-6">
-              {stats.map((stat, index) => (
-                <div key={index} className="text-center p-4 bg-white dark:bg-slate-800/50 rounded-xl border border-gray-300 dark:border-slate-700/50 hover:border-red-500/50 dark:hover:border-red-500/30 transition-colors">
-                  <div className="text-red-500 mb-2 flex justify-center">{stat.icon}</div>
-                  <div className="text-2xl font-bold text-gray-900 dark:text-white">{stat.value}</div>
-                  <div className="text-xs text-gray-500 dark:text-slate-500 uppercase tracking-wider mt-1">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
+    {/* Section label */}
+    <div className="flex items-center gap-4 mb-8 reveal">
+      <span className="text-[10px] font-mono text-red-500/70 tracking-[0.25em] uppercase">02 / About</span>
+      <div className="flex-1 h-px bg-white/[0.06]" />
+    </div>
+
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+
+      {/* Left — heading */}
+      <div className="reveal">
+        <h2 className="text-[clamp(2rem,4vw,3.5rem)] font-black leading-[0.9] tracking-tighter text-white uppercase mb-8">
+          I Build Products<br />
+          <span style={{ WebkitTextStroke: '2px rgba(255,255,255,0.2)', color: 'transparent' }}>That Ship</span>
+        </h2>
+
+        {/* Profile image */}
+        <div className="relative mt-6 rounded-2xl overflow-hidden h-80 border border-white/[0.06]">
+          <img src="/imagemyself.png" alt="Kawish Iqbal"
+            className="w-full h-full object-cover object-[center_10%] transition-all duration-700" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/60 via-transparent to-transparent" />
         </div>
       </div>
-    </section>
-  );
-};
+
+      {/* Right — text + stats */}
+      <div className="reveal">
+        <p className="text-white/50 text-lg leading-relaxed mb-6">
+          I'm a <span className="text-white font-semibold">Full Stack (MERN) Developer</span> with 2+ years of experience
+          turning complex problems into clean, performant products. I've worked across startups, led dev teams,
+          and shipped AI-integrated platforms to production.
+        </p>
+        <p className="text-white/40 text-base leading-relaxed mb-6">
+          From real-time SSE dashboards to Gemini API chatbots, Docker pipelines to role-based auth systems.
+          I focus on clean architecture and code that scales. Based in <span className="text-white/60">Islamabad</span>,
+          open to remote roles in <span className="text-white/60">Pakistan (Karachi, Lahore), UAE & Qatar</span>.
+        </p>
+
+        {/* Stats grid */}
+        <div className="grid grid-cols-2 gap-4 mb-10">
+          {stats.map((s) => (
+              <div key={s.label} className="p-4 border border-white/[0.07] rounded-xl hover:border-red-500/30 transition-colors">
+              <p className="text-3xl font-black text-white mb-1">{s.value}</p>
+              <p className="text-xs text-white/30 uppercase tracking-wider">{s.label}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Education */}
+        <div className="flex items-start gap-4 p-5 border border-white/[0.07] rounded-xl hover:border-white/15 transition-colors">
+          <div className="p-2.5 rounded-lg bg-red-500/10">
+            <GraduationCap size={18} className="text-red-500" />
+          </div>
+          <div>
+            <p className="text-white font-semibold text-sm">BS Computer Science</p>
+            <p className="text-white/40 text-xs mt-0.5">Iqra University, Islamabad · 2021 to 2025 · CGPA 3.51</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+);
 
 export default About;

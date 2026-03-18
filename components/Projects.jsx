@@ -1,64 +1,58 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import Tilt from "react-parallax-tilt";
-import { Github, ExternalLink, Code2 } from "lucide-react";
+import { Github, ExternalLink, ArrowUpRight } from "lucide-react";
 
-// --- YOUR PROJECT DATA WITH RESTORED LINKS ---
-const sampleProjects = [
+const projects = [
   {
-    title: "Muniba Mian",
-    description:
-      "Real estate website for client Muniba Mian featuring property listings, contact forms, and responsive design.",
-    image:
-      "https://plus.unsplash.com/premium_photo-1678903964473-1271ecfb0288?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmVhbCUyMGVzdGF0ZXxlbnwwfHwwfHx8MA%3D%3D",
-    demo: "https://muniba-mian.vercel.app/",
-    github: "https://github.com/Kawish07/Muniba-Mian",
-    tags: ["React", "Vite", "Tailwind"],
-  },
-  {
-    title: "Jeremy Real Estate",
-    description:
-      "Real estate website for client Jeremy featuring property listings, agent profiles, and contact forms.",
-    image:
-      "https://plus.unsplash.com/premium_photo-1689609950112-d66095626efb?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cmVhbCUyMGVzdGF0ZXxlbnwwfHwwfHx8MA%3D%3D",
-    demo: "https://jeremy-website-rose.vercel.app/",
-    github: "https://github.com/Kawish07/Jeremy-website",
-    tags: ["React", "Vite", "Tailwind"],
-  },
-  {
+    num: "01",
     title: "Smart Dining Hub",
-    description:
-      "MERN + Next.js + MongoDB Atlas project with AI-based recommendation system, chatbot, dashboards, real-time order tracking, payment integration.",
-    image:
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80",
+    description: "AI-powered restaurant management platform with real-time order tracking, role-based authentication (Admin/Staff/Customer), AI chatbot via Gemini API, and payment integration.",
+    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
     demo: "https://smart-dining-hub.vercel.app/",
     github: "https://github.com/Kawish07/smart-dining-hub",
-    tags: ["MERN", "Next.js", "AI", "Payment"],
+    tags: ["MERN", "Next.js", "Gemini API", "SSE", "JWT"],
     featured: true,
   },
   {
-    title: "Iqra University Website",
-    description: "Responsive university website built with Bootstrap.",
-    image:
-      "https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=600&q=80",
-    github: "https://github.com/Kawish07/iqra-university",
-    demo: "https://iqra-university-1.vercel.app/",
-    tags: ["Bootstrap", "Responsive"],
+    num: "02",
+    title: "Muniba Mian Real Estate",
+    description: "Client real estate website featuring property listings, advanced search filters, contact forms, and a fully responsive design.",
+    image: "https://plus.unsplash.com/premium_photo-1678903964473-1271ecfb0288?w=1200&auto=format&fit=crop&q=60",
+    demo: "https://muniba-mian.vercel.app/",
+    github: "https://github.com/Kawish07/Muniba-Mian",
+    tags: ["React", "Vite", "Tailwind CSS"],
   },
   {
-    title: "Proactive Cleaner Website",
-    description: "Mern Stack-based cleaning service site.",
-    image:
-      "https://plus.unsplash.com/premium_photo-1664301014580-9d9941d1fb51?w=600&auto=format&fit=crop&q=60",
+    num: "03",
+    title: "Jeremy Real Estate",
+    description: "Property listing platform with agent profiles, advanced filtering, and lead capture forms. Built for an international real estate client.",
+    image: "https://plus.unsplash.com/premium_photo-1689609950112-d66095626efb?w=1200&auto=format&fit=crop&q=60",
+    demo: "https://jeremy-website-rose.vercel.app/",
+    github: "https://github.com/Kawish07/Jeremy-website",
+    tags: ["React", "Vite", "Tailwind CSS"],
+  },
+  {
+    num: "04",
+    title: "Floor Detection System",
+    description: "AI-based floor detection using Python and Meta's Segment Anything Model (SAM). Automated pipeline for smart building and real estate applications with image segmentation.",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=80",
+    github: "https://github.com/Kawish07",
+    tags: ["Python", "SAM", "Computer Vision", "AI"],
+  },
+  {
+    num: "05",
+    title: "Proactive Cleaner",
+    description: "Full-stack cleaning service platform with online booking, EmailJS contact integration, and service management dashboard.",
+    image: "https://plus.unsplash.com/premium_photo-1664301014580-9d9941d1fb51?w=1200&auto=format&fit=crop&q=60",
     demo: "https://proactive-seven.vercel.app/",
     github: "https://github.com/Kawish07/proactive",
-    tags: ["EmailJS", "ReactJs", "NodeJs", "ExpressJs"],
+    tags: ["React", "Node.js", "Express.js", "EmailJS"],
   },
   {
-    title: "TriWeb Studio Website",
-    description: "Business website using MERN stack.",
-    image:
-      "https://images.unsplash.com/photo-1577045060575-07424f4e7aa7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dHJpd2ViJTIwc3R1ZGlvfGVufDB8fDB8fHww",
+    num: "06",
+    title: "TriWeb Studio",
+    description: "MERN stack business website for a web development studio, featuring service pages, portfolio showcase, and client inquiry system.",
+    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1200&q=80",
     demo: "https://tri-web-studio.vercel.app/",
     github: "https://github.com/Kawish07/TriWebStudio",
     tags: ["MERN"],
@@ -66,140 +60,93 @@ const sampleProjects = [
 ];
 
 const Projects = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.1 },
-    );
-    const section = document.getElementById("projects");
-    if (section) observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
+  const [hovered, setHovered] = useState(null);
 
   return (
-    <section id="projects" className="py-24 relative overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-100 to-white dark:from-slate-900 dark:to-slate-950 -z-20"></div>
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
+    <section id="projects" className="relative min-h-screen bg-[#0d0d0d] py-16 lg:py-24 px-6 sm:px-12 lg:px-16 overflow-hidden flex flex-col justify-center">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="text-red-500 font-bold tracking-widest uppercase text-sm mb-2 block">
-            My Portfolio
-          </span>
-          <h2 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white mb-4">
-            Featured{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">
-              Projects
-            </span>
-          </h2>
-          <p className="text-gray-600 dark:text-slate-400 max-w-2xl mx-auto">
-            Showcasing high-performance web applications built with the MERN
-            stack, AI integrations, and modern UI/UX principles.
-          </p>
-        </motion.div>
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {sampleProjects.map((project, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.15, duration: 0.6 }}
-              className="h-full"
-            >
-              <Tilt
-                tiltMaxAngleX={5}
-                tiltMaxAngleY={5}
-                scale={1.02}
-                glareEnable={true}
-                glareMaxOpacity={0.15}
-                glareColor="#ffffff"
-                glarePosition="all"
-                className="h-full"
+      {/* Label */}
+      <div className="flex items-center gap-4 mb-8 reveal">
+        <span className="text-[10px] font-mono text-red-500/70 tracking-[0.25em] uppercase">05 / Projects</span>
+        <div className="flex-1 h-px bg-white/[0.06]" />
+      </div>
+
+      {/* Heading */}
+      <div className="mb-10 reveal">
+        <h2 className="text-[clamp(2rem,4vw,3.5rem)] font-black leading-[0.9] tracking-tighter text-white uppercase">
+          Selected<br />
+          <span style={{ WebkitTextStroke: '2px rgba(255,255,255,0.2)', color: 'transparent' }}>Work</span>
+        </h2>
+      </div>
+
+      {/* Project list — Trigger-style hover reveal */}
+      <div className="space-y-0 reveal">
+        {projects.map((project, idx) => (
+          <motion.div
+            key={project.num}
+            onHoverStart={() => setHovered(idx)}
+            onHoverEnd={() => setHovered(null)}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: idx * 0.08, duration: 0.5 }}
+            className="group relative grid grid-cols-1 md:grid-cols-[60px_1fr_auto] gap-4 md:gap-8 py-8 border-b border-white/[0.06] hover:border-white/[0.12] transition-all duration-300 cursor-pointer"
+          >
+            {/* Number */}
+            <span className="font-mono text-xs text-white/20 pt-1.5">{project.num}</span>
+
+            {/* Content */}
+            <div>
+              <div className="flex flex-wrap items-center gap-3 mb-1.5">
+                <h3 className="text-lg md:text-xl font-bold text-white group-hover:text-red-400 transition-colors duration-300">
+                  {project.title}
+                </h3>
+                {project.featured && (
+                  <span className="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-red-500/20 text-red-400 border border-red-500/30">
+                    Featured
+                  </span>
+                )}
+              </div>
+              <p className="text-sm text-white/35 max-w-xl leading-relaxed line-clamp-2 mb-3">{project.description}</p>
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map(tag => (
+                  <span key={tag} className="text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded border border-white/[0.07] text-white/25">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Action buttons */}
+            <div className="flex items-center gap-3 shrink-0 mt-2 md:mt-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              {project.demo && (
+                <a href={project.demo} target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-4 py-2 bg-white text-black text-xs font-bold rounded-full hover:bg-red-500 hover:text-white transition-all">
+                  <ExternalLink size={12} /> Live
+                </a>
+              )}
+              <a href={project.github} target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-4 py-2 border border-white/[0.1] text-white/60 hover:text-white text-xs font-bold rounded-full hover:border-white/30 transition-all">
+                <Github size={12} /> Code
+              </a>
+            </div>
+
+            {/* Hover image — desktop only */}
+            {hovered === idx && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                className="hidden lg:block absolute right-48 top-1/2 -translate-y-1/2 w-52 h-32 rounded-xl overflow-hidden border border-white/[0.1] shadow-2xl z-20"
               >
-                <div className="group h-full bg-white dark:bg-slate-900/60 backdrop-blur-md rounded-2xl border border-gray-300 dark:border-slate-800 overflow-hidden hover:border-red-500/50 transition-all duration-500 shadow-2xl flex flex-col relative">
-                  {/* Image Area */}
-                  <div className="relative overflow-hidden h-56">
-                    <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-900 via-transparent to-transparent opacity-80 z-10"></div>
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                    />
-
-                    {/* Top Icon Badge */}
-                    <div className="absolute top-4 right-4 z-20 bg-white dark:bg-slate-900/90 backdrop-blur p-2 rounded-lg border border-gray-300 dark:border-slate-700 text-red-500 shadow-lg">
-                      <Code2 size={20} />
-                    </div>
-                  </div>
-
-                  {/* Content Area */}
-                  <div className="p-6 flex-1 flex flex-col relative z-20 -mt-10">
-                    <div className="bg-white dark:bg-slate-900/80 backdrop-blur-xl p-4 rounded-xl border border-gray-300 dark:border-slate-700/50 shadow-lg flex-1 flex flex-col">
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-red-500 transition-colors">
-                        {project.title}
-                      </h3>
-
-                      <p className="text-gray-600 dark:text-slate-400 text-sm mb-4 line-clamp-3 flex-1">
-                        {project.description}
-                      </p>
-
-                      {/* Tech Stack Tags */}
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {project.tags.map((tag, i) => (
-                          <span
-                            key={i}
-                            className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded bg-red-500/10 text-red-400 border border-red-500/20"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* RESTORED LINKS SECTION */}
-                      <div className="flex gap-3 mt-auto pt-4 border-t border-gray-200 dark:border-slate-800">
-                        {/* Live Demo Button */}
-                        <a
-                          href={project.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-red-600 hover:bg-red-700 text-white text-sm font-bold transition-all duration-300 hover:shadow-lg hover:shadow-red-600/25"
-                        >
-                          <ExternalLink size={16} />
-                          <span>Live</span>
-                        </a>
-
-                        {/* GitHub Button */}
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gray-200 hover:bg-gray-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-gray-800 dark:text-slate-300 hover:text-gray-900 dark:hover:text-white text-sm font-bold transition-all duration-300 border border-gray-300 dark:border-slate-700"
-                        >
-                          <Github size={16} />
-                          <span>Code</span>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Tilt>
-            </motion.div>
-          ))}
-        </div>
+                <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+              </motion.div>
+            )}
+          </motion.div>
+        ))}
       </div>
     </section>
   );

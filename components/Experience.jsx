@@ -1,95 +1,112 @@
-import React, { useState, useEffect } from 'react';
-import { Briefcase, Calendar } from 'lucide-react';
+import React from 'react';
 import { motion } from 'framer-motion';
 
 const experiences = [
   {
-    role: 'Mern Stack Developer',
+    num: '01',
+    role: 'MERN Stack Developer',
     company: 'Veclar Technologies',
-    duration: 'Nov 2025 - Present',
-    description: 'Developing scalable web applications, optimizing performance, and collaborating with cross-functional teams.',
-    color: 'border-red-500'
+    duration: 'Nov 2025 – Present',
+    type: 'Full-time',
+    bullets: [
+      'Building scalable web applications using the full MERN stack',
+      'Developing REST APIs serving real-time data with SSE',
+      'Improving backend performance through optimized database queries',
+    ],
   },
   {
-    role: 'Full Stack Developer',
+    num: '02',
+    role: 'Freelance Full Stack Developer',
+    company: 'Self-Employed',
+    duration: 'Mar 2025 – Present',
+    type: 'Freelance',
+    bullets: [
+      'Delivering end-to-end MERN solutions for clients in Pakistan & internationally',
+      'Real estate platforms, AI dashboards, and business websites',
+      'Strong focus on performance, clean architecture, and client satisfaction',
+    ],
+  },
+  {
+    num: '03',
+    role: 'Web Development Lead',
+    company: 'Evolvians Softwares',
+    duration: 'July 2025 – Sep 2025',
+    type: 'Contract',
+    bullets: [
+      'Led a team of 4 developers delivering React-based client projects',
+      'Designed backend architecture using Express.js & MongoDB',
+      'Conducted code reviews and maintained coding standards',
+    ],
+  },
+  {
+    num: '04',
+    role: 'Full Stack Developer (AI Integration)',
     company: 'Crafting Colons',
-    duration: '6 Months',
-    description: 'Built portfolio sites, University websites, and LMS systems. Focused on responsive design and accessibility.',
-    color: 'border-blue-500'
+    duration: 'Jan 2025 – Jun 2025',
+    type: 'Full-time',
+    bullets: [
+      'Developed production-ready apps with Next.js and MERN stack',
+      'Integrated AI chatbots using Gemini API and Botpress',
+      'Built real-time dashboards with live tracking and analytics',
+    ],
   },
-  {
-    role: 'ML Intern',
-    company: 'The Sparks Foundation',
-    duration: '1 Month Remote',
-    description: 'Worked on predictive modeling and data analysis using Python and Scikit-Learn.',
-    color: 'border-green-500'
-  },
-  {
-    role: 'Head of Web Dev',
-    company: 'Evolvians Software',
-    duration: '3 Months',
-    description: 'Led a team of 5 developers, managed code reviews, and architected the database structure.',
-    color: 'border-purple-500'
-  }
 ];
 
-const Experience = () => {
-  const [isVisible, setIsVisible] = useState(false);
+const Experience = () => (
+  <section id="experience" className="relative min-h-screen bg-[#0a0a0a] py-16 lg:py-24 px-6 sm:px-12 lg:px-16 overflow-hidden flex flex-col justify-center">
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) setIsVisible(true);
-    }, { threshold: 0.2 });
-    const section = document.getElementById('experience');
-    if (section) observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
+    <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-  return (
-    <section id="experience" className="py-24 bg-white dark:bg-slate-900/30">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-gray-900 dark:text-white text-center mb-16">Professional Journey</h2>
+    {/* Label */}
+    <div className="flex items-center gap-4 mb-8 reveal">
+      <span className="text-[10px] font-mono text-red-500/70 tracking-[0.25em] uppercase">04 / Experience</span>
+      <div className="flex-1 h-px bg-white/[0.06]" />
+    </div>
 
-        <div className="relative">
-          {/* Timeline Line */}
-          <div className="absolute left-4 md:left-1/2 h-full w-1 bg-gray-300 dark:bg-slate-800 -translate-x-1/2 rounded-full"></div>
+    {/* Heading */}
+    <div className="mb-10 reveal">
+      <h2 className="text-[clamp(2rem,4vw,3.5rem)] font-black leading-[0.9] tracking-tighter text-white uppercase">
+        Where I've<br />
+        <span style={{ WebkitTextStroke: '2px rgba(255,255,255,0.2)', color: 'transparent' }}>Worked</span>
+      </h2>
+    </div>
 
-          <div className="space-y-12">
-            {experiences.map((exp, idx) => (
-              <div 
-                key={idx} 
-                className={`relative flex flex-col md:flex-row items-center ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
-              >
-                {/* Dot */}
-                <div className="absolute left-4 md:left-1/2 w-6 h-6 bg-white dark:bg-slate-950 border-4 border-red-500 rounded-full -translate-x-1/2 z-10 shadow-[0_0_15px_rgba(220,38,38,0.5)]"></div>
+    {/* Experience list */}
+    <div className="space-y-0 reveal">
+      {experiences.map((exp, i) => (
+        <motion.div key={exp.num}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: i * 0.1, duration: 0.6 }}
+          className="group grid grid-cols-1 md:grid-cols-[80px_1fr] gap-4 md:gap-10 py-10 border-b border-white/[0.06] hover:border-white/[0.12] transition-colors"
+        >
+          {/* Number */}
+          <span className="font-mono text-xs text-white/20 pt-1">{exp.num}</span>
 
-                {/* Content */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: idx * 0.2 }}
-                  className={`ml-16 md:ml-0 md:w-1/2 ${idx % 2 === 0 ? 'md:pr-12' : 'md:pl-12'}`}
-                >
-                  <div className="bg-gray-100 dark:bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-300 dark:border-slate-700 hover:border-gray-400 dark:hover:border-slate-500 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-red-900/10 group">
-                    <div className="flex items-center gap-3 text-red-500 mb-2">
-                      <Briefcase size={18} />
-                      <span className="text-sm font-semibold uppercase tracking-wider">{exp.company}</span>
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-red-500 transition-colors">{exp.role}</h3>
-                    <div className="flex items-center gap-2 text-gray-600 dark:text-slate-400 text-sm mb-4">
-                      <Calendar size={14} />
-                      <span>{exp.duration}</span>
-                    </div>
-                    <p className="text-gray-700 dark:text-slate-300 leading-relaxed">{exp.description}</p>
-                  </div>
-                </motion.div>
+          {/* Content */}
+          <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
+            <div>
+              <div className="flex flex-wrap items-center gap-3 mb-2">
+                <h3 className="text-xl font-bold text-white group-hover:text-red-400 transition-colors">{exp.role}</h3>
+                <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border border-white/[0.1] text-white/30">{exp.type}</span>
               </div>
-            ))}
+              <p className="text-red-500/80 text-sm font-semibold mb-4">{exp.company}</p>
+              <ul className="space-y-1.5">
+                {exp.bullets.map(b => (
+                  <li key={b} className="flex items-start gap-2.5 text-sm text-white/40">
+                    <span className="mt-1.5 w-1 h-1 rounded-full bg-red-500/50 flex-shrink-0" />
+                    {b}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="flex-shrink-0 text-xs text-white/25 font-mono mt-0.5 whitespace-nowrap">{exp.duration}</div>
           </div>
-        </div>
-      </div>
-    </section>
-  );
-};
+        </motion.div>
+      ))}
+    </div>
+  </section>
+);
 
 export default Experience;
