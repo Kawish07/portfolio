@@ -8,10 +8,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        accent: '#dc2626',
+        accent: '#6366f1',
+        'accent-violet': '#7c3aed',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+        heading: ['Sora', 'Plus Jakarta Sans', 'sans-serif'],
       },
     },
   },

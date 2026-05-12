@@ -37,12 +37,12 @@ const Navbar = () => {
   return (
     <>
       {/* ── Desktop Fixed Left Sidebar ── */}
-      <aside className="hidden lg:flex fixed left-0 top-0 h-screen w-[280px] flex-col justify-between border-r border-white/[0.06] bg-[#0a0a0a]/80 backdrop-blur-sm z-50 px-8 py-10">
+      <aside className="hidden lg:flex fixed left-0 top-0 h-screen w-[280px] flex-col justify-between border-r border-white/[0.06] bg-[#0a0a0f]/85 backdrop-blur-xl z-50 px-8 py-10">
 
         {/* Logo */}
         <div>
           <a href="#hero" onClick={() => handleNav('#hero')} className="block mb-14">
-            <span className="text-xl font-black tracking-tighter text-white">KAWISH<span className="text-red-500">.</span>DEV</span>
+            <span className="text-xl font-black tracking-tighter text-[#e2e8f0]">KAWISH<span className="text-indigo-400">.</span>DEV</span>
             <p className="text-[11px] text-white/30 tracking-[0.2em] uppercase mt-0.5">Full Stack Developer</p>
           </a>
 
@@ -58,14 +58,14 @@ const Navbar = () => {
                     isActive ? 'bg-white/[0.06]' : 'hover:bg-white/[0.04]'
                   }`}
                 >
-                  <span className={`text-[10px] font-mono transition-colors ${isActive ? 'text-red-500' : 'text-white/20 group-hover:text-white/40'}`}>
+                  <span className={`text-[10px] font-mono transition-colors ${isActive ? 'text-indigo-400' : 'text-white/20 group-hover:text-white/40'}`}>
                     {link.num}
                   </span>
                   <span className={`text-sm font-medium transition-colors ${isActive ? 'text-white' : 'text-white/40 group-hover:text-white/80'}`}>
                     {link.label}
                   </span>
                   {isActive && (
-                    <motion.div layoutId="indicator" className="ml-auto w-1.5 h-1.5 rounded-full bg-red-500" />
+                    <motion.div layoutId="indicator" className="ml-auto w-1.5 h-1.5 rounded-full bg-indigo-500" />
                   )}
                 </button>
               );
@@ -103,8 +103,8 @@ const Navbar = () => {
       </aside>
 
       {/* ── Mobile Top Bar ── */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-[#0a0a0a]/90 backdrop-blur-sm border-b border-white/[0.06]">
-        <span className="text-lg font-black tracking-tighter text-white">KAWISH<span className="text-red-500">.</span>DEV</span>
+        <div className="lg:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-[#0a0a0f]/90 backdrop-blur-xl border-b border-white/[0.06]">
+        <span className="text-lg font-black tracking-tighter text-[#e2e8f0]">KAWISH<span className="text-indigo-400">.</span>DEV</span>
         <button onClick={() => setMenuOpen(v => !v)} className="text-white/60 hover:text-white transition-colors">
           {menuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
@@ -118,13 +118,13 @@ const Navbar = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '-100%' }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="lg:hidden fixed inset-0 z-40 bg-[#0a0a0a] flex flex-col px-8 pt-24 pb-10"
+            className="lg:hidden fixed inset-0 z-40 bg-[#0a0a0f] flex flex-col px-8 pt-24 pb-10"
           >
             <nav className="space-y-2 flex-1">
               {navLinks.map((link) => (
                 <button key={link.href} onClick={() => handleNav(link.href)}
                   className="flex items-center gap-4 w-full py-4 border-b border-white/[0.06] text-left">
-                  <span className="text-[10px] font-mono text-red-500">{link.num}</span>
+                  <span className="text-[10px] font-mono text-indigo-400">{link.num}</span>
                   <span className="text-2xl font-bold text-white">{link.label}</span>
                 </button>
               ))}

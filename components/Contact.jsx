@@ -7,7 +7,7 @@ const SERVICE_ID  = 'service_0bsp86f';
 const TEMPLATE_ID = 'template_zxq6mrs';
 const PUBLIC_KEY  = 'unLnuQ0vpWGog3kVz';
 
-const inputCls = 'w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-5 py-3.5 text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-red-500/60 focus:bg-white/[0.06] transition-all';
+const inputCls = 'w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-5 py-3.5 text-[#e2e8f0] text-sm placeholder:text-[#94a3b8]/40 focus:outline-none focus:border-indigo-500/60 focus:bg-indigo-500/[0.04] transition-all';
 
 const Contact = () => {
   const formRef = useRef();
@@ -24,13 +24,13 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="relative min-h-screen bg-[#0d0d0d] py-16 lg:py-24 px-6 sm:px-12 lg:px-16 overflow-hidden flex flex-col justify-center">
+    <section id="contact" className="relative min-h-screen bg-[#0a0a0f] py-16 lg:py-24 px-6 sm:px-12 lg:px-16 overflow-hidden flex flex-col justify-center">
 
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent" />
 
       {/* Label */}
       <div className="flex items-center gap-4 mb-8 reveal">
-        <span className="text-[10px] font-mono text-red-500/70 tracking-[0.25em] uppercase">06 / Contact</span>
+        <span className="text-[10px] font-mono text-indigo-400/70 tracking-[0.25em] uppercase">06 / Contact</span>
         <div className="flex-1 h-px bg-white/[0.06]" />
       </div>
 
@@ -40,9 +40,9 @@ const Contact = () => {
         <div className="reveal">
           <h2 className="text-[clamp(2rem,4vw,3.5rem)] font-black leading-[0.9] tracking-tighter text-white uppercase mb-8">
             Let's Build<br />
-            <span style={{ WebkitTextStroke: '2px rgba(255,255,255,0.2)', color: 'transparent' }}>Together</span>
+            <span style={{ WebkitTextStroke: '2px rgba(99,102,241,0.4)', color: 'transparent' }}>Together</span>
           </h2>
-          <p className="text-white/40 text-base leading-relaxed mb-8 max-w-sm">
+          <p className="text-[#94a3b8] text-base leading-relaxed mb-8 max-w-sm">
             Available for freelance projects and full-time roles. Got something interesting? Let's talk.
           </p>
 
@@ -53,12 +53,12 @@ const Contact = () => {
               { icon: <MapPin size={16} />, label: 'Location', value: 'Islamabad, Pakistan',      href: null },
             ].map(({ icon, label, value, href }) => (
               <div key={label} className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-lg border border-white/[0.08] flex items-center justify-center text-red-500 shrink-0">{icon}</div>
+                <div className="w-10 h-10 rounded-lg border border-white/[0.08] flex items-center justify-center text-indigo-400 shrink-0">{icon}</div>
                 <div>
-                  <p className="text-[10px] text-white/25 uppercase tracking-wider">{label}</p>
+                  <p className="text-[10px] text-[#94a3b8]/60 uppercase tracking-wider">{label}</p>
                   {href
-                    ? <a href={href} className="text-sm text-white/60 hover:text-white transition-colors">{value}</a>
-                    : <p className="text-sm text-white/60">{value}</p>}
+                    ? <a href={href} className="text-sm text-[#94a3b8] hover:text-[#e2e8f0] transition-colors">{value}</a>
+                    : <p className="text-sm text-[#94a3b8]">{value}</p>}
                 </div>
               </div>
             ))}
@@ -99,7 +99,7 @@ const Contact = () => {
             </div>
 
             <button type="submit" disabled={loading}
-              className="w-full flex items-center justify-center gap-3 py-4 bg-red-600 hover:bg-red-500 text-white font-bold rounded-xl transition-all shadow-[0_0_30px_rgba(220,38,38,0.3)] hover:shadow-[0_0_40px_rgba(220,38,38,0.5)] disabled:opacity-60">
+              className="w-full flex items-center justify-center gap-3 py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl transition-all shadow-[0_0_30px_rgba(99,102,241,0.3)] hover:shadow-[0_0_40px_rgba(99,102,241,0.5)] hover:scale-[1.01] disabled:opacity-60">
               {loading ? 'Sending...' : <><Send size={16} /> Send Message</>}
             </button>
 

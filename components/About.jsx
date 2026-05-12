@@ -10,14 +10,14 @@ const stats = [
 ];
 
 const About = () => (
-  <section id="about" className="relative min-h-screen bg-[#0a0a0a] py-16 lg:py-24 px-6 sm:px-12 lg:px-16 overflow-hidden flex flex-col justify-center">
+  <section id="about" className="relative min-h-screen bg-[#0a0a0f] py-16 lg:py-24 px-6 sm:px-12 lg:px-16 overflow-hidden flex flex-col justify-center">
 
     {/* Thin top border */}
     <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
     {/* Section label */}
     <div className="flex items-center gap-4 mb-8 reveal">
-      <span className="text-[10px] font-mono text-red-500/70 tracking-[0.25em] uppercase">02 / About</span>
+      <span className="text-[10px] font-mono text-indigo-400/70 tracking-[0.25em] uppercase">02 / About</span>
       <div className="flex-1 h-px bg-white/[0.06]" />
     </div>
 
@@ -27,7 +27,7 @@ const About = () => (
       <div className="reveal">
         <h2 className="text-[clamp(2rem,4vw,3.5rem)] font-black leading-[0.9] tracking-tighter text-white uppercase mb-8">
           I Build Products<br />
-          <span style={{ WebkitTextStroke: '2px rgba(255,255,255,0.2)', color: 'transparent' }}>That Ship</span>
+            <span style={{ WebkitTextStroke: '2px rgba(99,102,241,0.35)', color: 'transparent' }}>That Ship</span>
         </h2>
 
         {/* Profile image */}
@@ -40,35 +40,35 @@ const About = () => (
 
       {/* Right — text + stats */}
       <div className="reveal">
-        <p className="text-white/50 text-lg leading-relaxed mb-6">
-          I'm a <span className="text-white font-semibold">Full Stack (MERN) Developer</span> with 2+ years of experience
+          <p className="text-[#e2e8f0]/60 text-lg leading-relaxed mb-6">
+          I'm a <span className="text-[#e2e8f0] font-semibold">Full Stack (MERN) Developer</span> with 2+ years of experience
           turning complex problems into clean, performant products. I've worked across startups, led dev teams,
           and shipped AI-integrated platforms to production.
         </p>
-        <p className="text-white/40 text-base leading-relaxed mb-6">
+          <p className="text-[#94a3b8] text-base leading-relaxed mb-6">
           From real-time SSE dashboards to Gemini API chatbots, Docker pipelines to role-based auth systems.
-          I focus on clean architecture and code that scales. Based in <span className="text-white/60">Islamabad</span>,
-          open to remote roles in <span className="text-white/60">Pakistan (Karachi, Lahore), UAE & Qatar</span>.
+          I focus on clean architecture and code that scales. Based in <span className="text-[#e2e8f0]/70">Islamabad</span>,
+          open to remote roles in <span className="text-[#e2e8f0]/70">Pakistan (Karachi, Lahore), UAE &amp; Qatar</span>.
         </p>
 
         {/* Stats grid */}
         <div className="grid grid-cols-2 gap-4 mb-10">
           {stats.map((s) => (
-              <div key={s.label} className="p-4 border border-white/[0.07] rounded-xl hover:border-red-500/30 transition-colors">
-              <p className="text-3xl font-black text-white mb-1">{s.value}</p>
-              <p className="text-xs text-white/30 uppercase tracking-wider">{s.label}</p>
+              <div key={s.label} className="p-4 border border-white/[0.07] rounded-xl hover:border-indigo-500/30 transition-colors">
+              <p className="text-3xl font-black text-[#e2e8f0] mb-1">{s.value}</p>
+              <p className="text-xs text-[#94a3b8] uppercase tracking-wider">{s.label}</p>
             </div>
           ))}
         </div>
 
         {/* Education */}
-        <div className="flex items-start gap-4 p-5 border border-white/[0.07] rounded-xl hover:border-white/15 transition-colors">
-          <div className="p-2.5 rounded-lg bg-red-500/10">
-            <GraduationCap size={18} className="text-red-500" />
+          <div className="flex items-start gap-4 p-5 border border-white/[0.07] rounded-xl hover:border-indigo-500/20 transition-colors">
+          <div className="p-2.5 rounded-lg bg-indigo-500/10">
+            <GraduationCap size={18} className="text-indigo-400" />
           </div>
           <div>
-            <p className="text-white font-semibold text-sm">BS Computer Science</p>
-            <p className="text-white/40 text-xs mt-0.5">Iqra University, Islamabad · 2021 to 2025 · CGPA 3.51</p>
+            <p className="text-[#e2e8f0] font-semibold text-sm">BS Computer Science</p>
+            <p className="text-[#94a3b8] text-xs mt-0.5">Iqra University, Islamabad · 2021 to 2025 · CGPA 3.51</p>
           </div>
         </div>
       </div>

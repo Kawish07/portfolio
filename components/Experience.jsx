@@ -53,13 +53,13 @@ const experiences = [
 ];
 
 const Experience = () => (
-  <section id="experience" className="relative min-h-screen bg-[#0a0a0a] py-16 lg:py-24 px-6 sm:px-12 lg:px-16 overflow-hidden flex flex-col justify-center">
+  <section id="experience" className="relative min-h-screen bg-[#0a0a0f] py-16 lg:py-24 px-6 sm:px-12 lg:px-16 overflow-hidden flex flex-col justify-center">
 
     <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
     {/* Label */}
     <div className="flex items-center gap-4 mb-8 reveal">
-      <span className="text-[10px] font-mono text-red-500/70 tracking-[0.25em] uppercase">04 / Experience</span>
+      <span className="text-[10px] font-mono text-indigo-400/70 tracking-[0.25em] uppercase">04 / Experience</span>
       <div className="flex-1 h-px bg-white/[0.06]" />
     </div>
 
@@ -67,7 +67,7 @@ const Experience = () => (
     <div className="mb-10 reveal">
       <h2 className="text-[clamp(2rem,4vw,3.5rem)] font-black leading-[0.9] tracking-tighter text-white uppercase">
         Where I've<br />
-        <span style={{ WebkitTextStroke: '2px rgba(255,255,255,0.2)', color: 'transparent' }}>Worked</span>
+          <span style={{ WebkitTextStroke: '2px rgba(99,102,241,0.35)', color: 'transparent' }}>Worked</span>
       </h2>
     </div>
 
@@ -88,14 +88,14 @@ const Experience = () => (
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
             <div>
               <div className="flex flex-wrap items-center gap-3 mb-2">
-                <h3 className="text-xl font-bold text-white group-hover:text-red-400 transition-colors">{exp.role}</h3>
+                <h3 className="text-xl font-bold text-[#e2e8f0] group-hover:text-indigo-400 transition-colors">{exp.role}</h3>
                 <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border border-white/[0.1] text-white/30">{exp.type}</span>
               </div>
-              <p className="text-red-500/80 text-sm font-semibold mb-4">{exp.company}</p>
+              <p className="text-indigo-400/80 text-sm font-semibold mb-4">{exp.company}</p>
               <ul className="space-y-1.5">
                 {exp.bullets.map(b => (
                   <li key={b} className="flex items-start gap-2.5 text-sm text-white/40">
-                    <span className="mt-1.5 w-1 h-1 rounded-full bg-red-500/50 flex-shrink-0" />
+                    <span className="mt-1.5 w-1 h-1 rounded-full bg-indigo-500/50 flex-shrink-0" />
                     {b}
                   </li>
                 ))}

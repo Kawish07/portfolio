@@ -77,7 +77,7 @@ function App() {
       <div id="cursor" />
       <div id="cursor-ring" />
 
-      <div className="grain min-h-screen bg-[#0a0a0a] text-white selection:bg-red-600 selection:text-white">
+      <div className="grain min-h-screen bg-[#0a0a0f] text-[#e2e8f0] selection:bg-indigo-600 selection:text-white">
         {/* Fixed Left Sidebar */}
         <Navbar />
 
