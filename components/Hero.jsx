@@ -126,7 +126,7 @@ const Hero = () => {
               View My Work
               <ArrowDownRight size={16} className="group-hover:translate-x-0.5 group-hover:translate-y-0.5 transition-transform" />
             </a>
-            <a href="/Kawish-Iqbal_Mern_Developer_AI_Resume.pdf" download
+            <a href="/Kawish_Iqbal_Resume.pdf" download
               className="flex items-center gap-2 px-7 py-3.5 border border-indigo-500/40 hover:border-indigo-400 text-[#e2e8f0] hover:text-white text-sm font-bold rounded-full transition-all duration-300 hover:bg-indigo-500/10 hover:scale-[1.03]">
               <Download size={15} /> Download CV
             </a>

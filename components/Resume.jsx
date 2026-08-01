@@ -1,7 +1,7 @@
 import React from 'react';
 import { Download, FileText } from 'lucide-react';
 
-const PDF_PATH = '/Kawish-Iqbal_Mern_Developer_AI_Resume.pdf';
+const PDF_PATH = '/Kawish_Iqbal_Resume.pdf';
 
 const Resume = () => (
   <section className="relative bg-[#0d1117] py-24 px-6 sm:px-12 lg:px-16 overflow-hidden">
